@@ -1,0 +1,37 @@
+schema_version: 1
+id: headers-duplicate-and-empty-001
+title: Repeated, mixed-case and empty headers
+category: headers
+
+question: >-
+  Are repeated headers, unusual header-name casing and empty header values preserved in both directions between curl and Python's http.server?
+
+tags:
+  - headers
+  - duplicate-headers
+  - header-case
+  - empty-header
+  - http-1.1
+  - curl
+
+protocol:
+  - http/1.1
+
+clients:
+  - curl
+
+servers:
+  - python-http.server
+
+environment:
+  requires:
+    - python3
+    - curl
+
+reproduce: reproduce.sh
+
+expected: >-
+  Header names are case-insensitive, so casing may be preserved or normalized
+  by either side. Repeated headers should arrive as separate fields. An empty
+  value is allowed by the grammar. This is an expectation, not a verified
+  result.

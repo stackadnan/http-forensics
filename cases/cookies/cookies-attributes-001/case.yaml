@@ -1,0 +1,38 @@
+schema_version: 1
+id: cookies-attributes-001
+title: Set-Cookie Path, Secure and HttpOnly in curl's cookie jar
+category: cookies
+
+question: >-
+  Which cookies does curl send back when the server sets one with Path=/app, one with Secure, and one with no restrictions?
+
+tags:
+  - cookies
+  - set-cookie
+  - path
+  - secure
+  - httponly
+  - http-1.1
+  - curl
+
+protocol:
+  - http/1.1
+
+clients:
+  - curl
+
+servers:
+  - python-http.server
+
+environment:
+  requires:
+    - python3
+    - curl
+
+reproduce: reproduce.sh
+
+expected: >-
+  The Path=/app cookie should only be sent for URLs under /app. The Secure
+  cookie would normally not be sent over plain HTTP; whether curl makes an
+  exception for 127.0.0.1 is not known in advance. This is an expectation, not
+  a verified result.

@@ -1,0 +1,36 @@
+schema_version: 1
+id: caching-cache-control-001
+title: Cache-Control on responses fetched by curl
+category: caching
+
+question: >-
+  Does curl reuse a response that the server marked Cache-Control max-age=3600, or does each invocation reach the server?
+
+tags:
+  - caching
+  - cache-control
+  - max-age
+  - no-store
+  - http-1.1
+  - curl
+
+protocol:
+  - http/1.1
+
+clients:
+  - curl
+
+servers:
+  - python-http.server
+
+environment:
+  requires:
+    - python3
+    - curl
+
+reproduce: reproduce.sh
+
+expected: >-
+  curl has no HTTP cache of its own, so every invocation is expected to reach
+  the server regardless of Cache-Control. This is an expectation, not a
+  verified result.

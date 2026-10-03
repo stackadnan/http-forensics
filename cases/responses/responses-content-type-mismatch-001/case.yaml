@@ -1,0 +1,36 @@
+schema_version: 1
+id: responses-content-type-mismatch-001
+title: Content-Type that does not match the body
+category: responses
+
+question: >-
+  What does curl do when the Content-Type of a response disagrees with its body, and which Content-Type does it attach to a JSON body sent with -d?
+
+tags:
+  - content-type
+  - mime
+  - responses
+  - requests
+  - http-1.1
+  - curl
+
+protocol:
+  - http/1.1
+
+clients:
+  - curl
+
+servers:
+  - python-http.server
+
+environment:
+  requires:
+    - python3
+    - curl
+
+reproduce: reproduce.sh
+
+expected: >-
+  curl is expected to print the body unchanged whatever the response Content-
+  Type says, and to label -d bodies as application/x-www-form-urlencoded
+  unless told otherwise. This is an expectation, not a verified result.

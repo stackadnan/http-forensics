@@ -1,0 +1,35 @@
+schema_version: 1
+id: redirect-post-303-001
+title: POST followed by a 303 redirect
+category: redirects
+
+question: >-
+  Does curl preserve the POST method, and the request body, after a 303 redirect?
+
+tags:
+  - redirects
+  - post
+  - status-303
+  - http-1.1
+  - curl
+
+protocol:
+  - http/1.1
+
+clients:
+  - curl
+
+servers:
+  - python-http.server
+
+environment:
+  requires:
+    - python3
+    - curl
+
+reproduce: reproduce.sh
+
+expected: >-
+  curl -L is expected to follow the 303 with GET and no body, and to keep POST
+  only when --post303 is given. This is an expectation from the specification
+  text and curl's documented options, not a verified result.

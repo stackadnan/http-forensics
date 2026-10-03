@@ -1,0 +1,35 @@
+schema_version: 1
+id: redirect-post-308-001
+title: POST followed by a 308 redirect
+category: redirects
+
+question: >-
+  Does curl preserve the POST method, and the request body, after a 308 redirect?
+
+tags:
+  - redirects
+  - post
+  - status-308
+  - http-1.1
+  - curl
+
+protocol:
+  - http/1.1
+
+clients:
+  - curl
+
+servers:
+  - python-http.server
+
+environment:
+  requires:
+    - python3
+    - curl
+
+reproduce: reproduce.sh
+
+expected: >-
+  The 308 status is defined to forbid changing the request method, so curl -L
+  is expected to re-send POST with the body. This is an expectation from RFC
+  9110, not a verified result.

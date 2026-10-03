@@ -1,0 +1,36 @@
+schema_version: 1
+id: caching-etag-304-001
+title: ETag validator and a 304 Not Modified response
+category: caching
+
+question: >-
+  When a client sends If-None-Match with the ETag it was given, does the server answer 304 without a body, and what does curl show for it?
+
+tags:
+  - caching
+  - etag
+  - conditional-requests
+  - status-304
+  - http-1.1
+  - curl
+
+protocol:
+  - http/1.1
+
+clients:
+  - curl
+
+servers:
+  - python-http.server
+
+environment:
+  requires:
+    - python3
+    - curl
+
+reproduce: reproduce.sh
+
+expected: >-
+  A matching If-None-Match should produce 304 Not Modified with no body, and a
+  non-matching value should produce a normal 200. This is an expectation from
+  RFC 9110 and RFC 9111, not a verified result.
