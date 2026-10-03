@@ -1,10 +1,12 @@
 import copy
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
 import yaml
 
+from http_forensics import cases
 from http_forensics.cases import CaseError, load_case, load_cases, validate
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -160,6 +162,26 @@ class LoadTest(unittest.TestCase):
         self.assertEqual(data["id"], VALID["id"])
         with self.assertRaisesRegex(CaseError, "duplicate id"):
             load_cases(self.root)
+
+
+class JsonSchemaTest(unittest.TestCase):
+    """schemas/case.schema.json documents the format; keep it from drifting."""
+
+    def setUp(self):
+        self.schema = json.loads((REPO_ROOT / "schemas" / "case.schema.json").read_text())
+
+    def test_constants_match_validator(self):
+        props = self.schema["properties"]
+        self.assertEqual(tuple(props["category"]["enum"]), cases.CATEGORIES)
+        self.assertEqual(tuple(props["protocol"]["items"]["enum"]), cases.PROTOCOLS)
+        self.assertEqual(props["schema_version"]["const"], cases.SCHEMA_VERSION)
+        self.assertEqual(props["id"]["pattern"], cases.ID_PATTERN.pattern)
+        self.assertEqual(props["tags"]["items"]["pattern"], cases.TAG_PATTERN.pattern)
+
+    def test_fields_match_validator(self):
+        self.assertEqual(set(self.schema["properties"]), cases.KNOWN_FIELDS)
+        optional = {"expected"}
+        self.assertEqual(set(self.schema["required"]), cases.KNOWN_FIELDS - optional)
 
 
 class RepositoryCasesTest(unittest.TestCase):
