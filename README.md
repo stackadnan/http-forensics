@@ -46,7 +46,11 @@ tests/            tests for the above, plus a check of every case in the repo
 docs/             the case format
 ```
 
-Each case directory contains `case.yaml`, `README.md`, `reproduce.sh` and the server it uses. The format is described in [docs/case-format.md](docs/case-format.md). The `requests` category is reserved but has no cases yet.
+Each case directory contains `case.yaml`, `README.md`, `reproduce.sh` and the server it uses. The format is described in [docs/case-format.md](https://github.com/stackadnan/http-forensics/blob/main/docs/case-format.md). The `requests` category is reserved but has no cases yet.
+
+## Installing from PyPI
+
+`pip install http-forensics` installs only the case loader and validator (`http_forensics.cases`). The cases, servers and reproduction scripts are not part of the package; clone the repository to run them.
 
 ## Running a case
 
@@ -70,7 +74,7 @@ python3 -m venv .venv
 
 ## Contributing
 
-The main contribution is: find one interesting HTTP behavior and turn it into a reproducible case. See [CONTRIBUTING.md](CONTRIBUTING.md).
+The main contribution is: find one interesting HTTP behavior and turn it into a reproducible case. See [CONTRIBUTING.md](https://github.com/stackadnan/http-forensics/blob/main/CONTRIBUTING.md).
 
 ## License
 
