@@ -1,0 +1,28 @@
+name: Case idea
+description: Suggest an HTTP behavior worth turning into a reproducible case.
+labels: ["case"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: The single question the case would answer, e.g. "Does X do Y when Z?"
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters
+      description: What goes wrong in practice, or why the answer is not obvious.
+    validations:
+      required: true
+  - type: input
+    id: clients
+    attributes:
+      label: Client(s) and server(s) involved
+      description: Anything that can run locally, e.g. curl, a Python library, an nginx build.
+  - type: textarea
+    id: expectation
+    attributes:
+      label: What you expect (optional)
+      description: Label it as an expectation unless you have already run it.

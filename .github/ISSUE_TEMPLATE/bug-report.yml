@@ -1,0 +1,29 @@
+name: Bug report
+description: A case that does not reproduce, a wrong observation, or a problem in the loader/validator.
+labels: ["bug"]
+body:
+  - type: input
+    id: case
+    attributes:
+      label: Case ID
+      description: e.g. redirect-post-301-001. Leave empty for loader or validator problems.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Paste the output of the script or test, with anything sensitive removed.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version, and client/server versions (for example `curl --version`).
+    validations:
+      required: true
