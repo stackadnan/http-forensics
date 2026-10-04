@@ -8,7 +8,7 @@ Does curl preserve the POST method, and the request body, after a 307 redirect?
 
 ## Why it matters
 
-301 and 302 predate clear rules about the method, so clients rewrite POST to GET. 307 was defined so the method and body are not changed (RFC 9110, section 15.4.8). Comparing it with the 301, 302 and 303 cases shows which status code a server has to use when the client must repeat the POST.
+Clients commonly rewrite POST to GET on 301 and 302. RFC 9110 (section 15.4.8) says that for a 307 the user agent "MUST NOT change the request method" when redirecting automatically. Comparing it with the 301, 302 and 303 cases shows which status code a server has to use when the client must repeat the POST.
 
 ## Setup
 

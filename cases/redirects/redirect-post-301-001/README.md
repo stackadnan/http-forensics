@@ -8,7 +8,7 @@ Does curl preserve the POST method, and the request body, after a 301 redirect?
 
 ## Why it matters
 
-Historically, user agents rewrote POST to GET on 301 and 302 even though the original specifications did not intend that. RFC 9110 (section 15.4.2) says a user agent MAY change the method to GET for a 301 response to POST. Clients differ in whether they do so, and curl has an option to keep POST.
+Historically, user agents rewrote POST to GET on 301 and 302. RFC 9110 (section 15.4.2) keeps this as a note: "for historical reasons, a user agent MAY change the request method from POST to GET", and names 308 as the status code to use if that is undesired. Clients differ in whether they do so, and curl has an option to keep POST.
 
 Code that POSTs through a redirect (form submissions, webhooks, API calls behind a URL change) can silently turn into a GET without the body. The server then sees a different request than the one the client sent.
 

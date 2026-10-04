@@ -8,7 +8,7 @@ Does curl preserve the POST method, and the request body, after a 302 redirect?
 
 ## Why it matters
 
-302 has the same history as 301: RFC 9110 (section 15.4.3) allows a user agent to change POST to GET. Whether a given client rewrites is a client behavior, which this case observes.
+302 has the same history as 301: RFC 9110 (section 15.4.3) carries the same note (a user agent MAY change POST to GET for historical reasons) and names 307 as the alternative. Whether a given client rewrites is a client behavior, which this case observes.
 
 Code that POSTs through a redirect (form submissions, webhooks, API calls behind a URL change) can silently turn into a GET without the body. The server then sees a different request than the one the client sent.
 

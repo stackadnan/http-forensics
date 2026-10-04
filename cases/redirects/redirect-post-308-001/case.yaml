@@ -30,6 +30,6 @@ environment:
 reproduce: reproduce.sh
 
 expected: >-
-  The 308 status is defined to forbid changing the request method, so curl -L
+  The 308 status is defined (RFC 7538) to disallow changing POST to GET, so curl -L
   is expected to re-send POST with the body. This is an expectation from RFC
   9110, not a verified result.

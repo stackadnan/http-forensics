@@ -8,7 +8,7 @@ Does curl preserve the POST method, and the request body, after a 303 redirect?
 
 ## Why it matters
 
-303 is the status meant for 'the result of your POST is over there, fetch it with GET'. RFC 9110 (section 15.4.4) describes the redirected request as a retrieval with GET (or HEAD), so a client that keeps POST is not following the intended semantics.
+303 is the status meant for 'the result of your POST is over there, fetch it with GET'. RFC 9110 (section 15.4.4) says a user agent can follow it with a retrieval request (GET or HEAD), and that it is primarily used to send the user agent from the result of a POST to a separate resource.
 
 Code that POSTs through a redirect (form submissions, webhooks, API calls behind a URL change) can silently turn into a GET without the body. The server then sees a different request than the one the client sent.
 
